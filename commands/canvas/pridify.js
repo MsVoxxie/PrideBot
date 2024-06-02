@@ -18,8 +18,9 @@ module.exports = {
 					{ name: 'Aromantic', value: 'aromantic' },
 					{ name: 'Asexual', value: 'asexual' },
 					{ name: 'Bisexual', value: 'bisexual' },
-					{ name: 'Gay', value: 'gay' },
+					{ name: 'Gay / Rainbow', value: 'gay' },
 					{ name: 'Genderfluid', value: 'genderfluid' },
+					{ name: 'Italian', value: 'italian' },
 					{ name: 'Lesbian', value: 'lesbian' },
 					{ name: 'Nonbinary', value: 'nonbinary' },
 					{ name: 'Pansexual', value: 'pansexual' },
@@ -37,8 +38,9 @@ module.exports = {
 					{ name: 'Aromantic', value: 'aromantic' },
 					{ name: 'Asexual', value: 'asexual' },
 					{ name: 'Bisexual', value: 'bisexual' },
-					{ name: 'Gay', value: 'gay' },
+					{ name: 'Gay / Rainbow', value: 'gay' },
 					{ name: 'Genderfluid', value: 'genderfluid' },
+					{ name: 'Italian', value: 'italian' },
 					{ name: 'Lesbian', value: 'lesbian' },
 					{ name: 'Nonbinary', value: 'nonbinary' },
 					{ name: 'Pansexual', value: 'pansexual' },
@@ -46,7 +48,7 @@ module.exports = {
 					{ name: 'Transexual', value: 'transexual' }
 				)
 		)
-		.addIntegerOption((option) => option.setName('size').setDescription('The size of your border ring. [Default 3] (0-9)').setMinValue(0).setMaxValue(9).setRequired(false)),
+		.addIntegerOption((option) => option.setName('size').setDescription('The size of your border ring. [Default 3] (1-9)').setMinValue(1).setMaxValue(9).setRequired(false)),
 	options: {
 		devOnly: false,
 		disabled: false,
@@ -71,6 +73,7 @@ module.exports = {
 			asexual: ['#000000', '#A3A3A3', '#FFFFFF', '#800080'],
 			bisexual: ['#D60270', '#9B4F96', '#0038A8'],
 			gay: ['#FF000E', '#FF5000', '#FAD220', '#138F3E', '#3558A0', '#880082'],
+			italian: ['#009246', '#FFFFFF', '#CE2B37'],
 			genderfluid: ['#FF75A2', '#EFEFEF', '#BE18D6', '#000000', '#333EBD'],
 			lesbian: ['#D52D00', '#FF9A56', '#FFFFFF', '#D362A4', '#A30262'],
 			nonbinary: ['#FFF433', '#FFFFFF', '#9B59D0', '#2D2D2D'],
@@ -108,6 +111,8 @@ module.exports = {
 			);
 
 			textures.forEach((texture, index) => {
+				// Rotate the image 90 degrees if it's italian
+				if (flags[index] === 'italian') texture.rotate(90);
 				const width = size * ((index + 1) / flags.length);
 				texture.resize(width, size, jimp.RESIZE_NEAREST_NEIGHBOR);
 			});
